@@ -3,12 +3,13 @@ import Foundation
 actor APIClient {
     static let shared = APIClient()
 
-    private var baseURL: URL {
-        guard let urlString = UserDefaults.standard.string(forKey: "apiURL"),
-              let url = URL(string: urlString) else {
-            return URL(string: "http://localhost:3000")!
+    private var baseURLString: String {
+        var urlString = UserDefaults.standard.string(forKey: "apiURL") ?? "http://localhost:3000"
+        // Remove trailing slash if present
+        if urlString.hasSuffix("/") {
+            urlString = String(urlString.dropLast())
         }
-        return url
+        return urlString
     }
 
     private var apiKey: String {
@@ -22,58 +23,50 @@ actor APIClient {
 
     private init() {}
 
+    private func buildURL(path: String) -> URL {
+        let fullURL = "\(baseURLString)\(path)"
+        print("[APIClient] Building URL: \(fullURL)")
+        return URL(string: fullURL)!
+    }
+
     // MARK: - API Methods
 
     func fetchSessions() async throws -> SessionsResponse {
-        let url = baseURL.appendingPathComponent("api/sessions")
+        let url = buildURL(path: "/api/sessions")
         return try await request(url: url)
     }
 
     func fetchSession(id: String) async throws -> Session {
-        let url = baseURL.appendingPathComponent("api/sessions/\(id)")
+        let url = buildURL(path: "/api/sessions/\(id)")
         let response: SingleSessionResponse = try await request(url: url)
         return response.session
     }
 
     func fetchEvents(for sessionId: String, since: String? = nil, limit: Int = 50) async throws -> EventsResponse {
-        var components = URLComponents(url: baseURL.appendingPathComponent("api/sessions/\(sessionId)/events"), resolvingAgainstBaseURL: false)!
-
-        var queryItems: [URLQueryItem] = [
-            URLQueryItem(name: "limit", value: String(limit))
-        ]
-
+        var path = "/api/sessions/\(sessionId)/events?limit=\(limit)"
         if let since = since {
-            queryItems.append(URLQueryItem(name: "since", value: since))
+            path += "&since=\(since)"
         }
-
-        components.queryItems = queryItems
-
-        return try await request(url: components.url!)
+        let url = buildURL(path: path)
+        return try await request(url: url)
     }
 
     func fetchAllEvents(since: String? = nil, limit: Int = 100) async throws -> EventsResponse {
-        var components = URLComponents(url: baseURL.appendingPathComponent("api/events"), resolvingAgainstBaseURL: false)!
-
-        var queryItems: [URLQueryItem] = [
-            URLQueryItem(name: "limit", value: String(limit))
-        ]
-
+        var path = "/api/events?limit=\(limit)"
         if let since = since {
-            queryItems.append(URLQueryItem(name: "since", value: since))
+            path += "&since=\(since)"
         }
-
-        components.queryItems = queryItems
-
-        return try await request(url: components.url!)
+        let url = buildURL(path: path)
+        return try await request(url: url)
     }
 
     func fetchStats() async throws -> StatsResponse {
-        let url = baseURL.appendingPathComponent("api/stats")
+        let url = buildURL(path: "/api/stats")
         return try await request(url: url)
     }
 
     func checkHealth() async throws -> Bool {
-        let url = baseURL.appendingPathComponent("health")
+        let url = buildURL(path: "/health")
         let _: HealthResponse = try await request(url: url)
         return true
     }
@@ -86,13 +79,20 @@ actor APIClient {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.timeoutInterval = 10
 
+        print("[APIClient] Request: \(url.absoluteString)")
+        print("[APIClient] API Key: \(apiKey.prefix(10))...")
+
         let (data, response) = try await URLSession.shared.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse else {
+            print("[APIClient] Error: Invalid response type")
             throw APIError.invalidResponse
         }
 
+        print("[APIClient] Status: \(httpResponse.statusCode)")
+
         guard httpResponse.statusCode == 200 else {
+            print("[APIClient] Error response: \(String(data: data, encoding: .utf8) ?? "nil")")
             if httpResponse.statusCode == 401 {
                 throw APIError.unauthorized
             }
@@ -102,8 +102,8 @@ actor APIClient {
         do {
             return try decoder.decode(T.self, from: data)
         } catch {
-            print("Decode error: \(error)")
-            print("Response: \(String(data: data, encoding: .utf8) ?? "nil")")
+            print("[APIClient] Decode error: \(error)")
+            print("[APIClient] Response: \(String(data: data, encoding: .utf8) ?? "nil")")
             throw APIError.decodingError(error)
         }
     }

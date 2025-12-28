@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		001 /* ClaudeMonitorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101; };
-		002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102; };
-		003 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103; };
-		004 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104; };
-		005 /* SessionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105; };
-		006 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106; };
-		007 /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107; };
-		008 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108; };
-		009 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109; };
-		010 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110; };
-		011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 111; };
+		001 /* ClaudeMonitorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101 /* ClaudeMonitorApp.swift */; };
+		002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102 /* ContentView.swift */; };
+		003 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103 /* Session.swift */; };
+		004 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104 /* APIClient.swift */; };
+		005 /* SessionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105 /* SessionsManager.swift */; };
+		006 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106 /* DashboardView.swift */; };
+		007 /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107 /* SessionDetailView.swift */; };
+		008 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108 /* StatsView.swift */; };
+		009 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109 /* SettingsView.swift */; };
+		010 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110 /* Colors.swift */; };
+		011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 111 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,7 +125,7 @@
 /* Begin PBXNativeTarget section */
 		400 /* ClaudeMonitor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 500;
+			buildConfigurationList = 500 /* Build configuration list for PBXNativeTarget "ClaudeMonitor" */;
 			buildPhases = (
 				401 /* Sources */,
 				200 /* Frameworks */,
@@ -155,7 +155,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 601;
+			buildConfigurationList = 601 /* Build configuration list for PBXProject "ClaudeMonitor" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -331,7 +331,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QC7B77KK29;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Claude Monitor";
@@ -362,7 +362,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QC7B77KK29;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Claude Monitor";
