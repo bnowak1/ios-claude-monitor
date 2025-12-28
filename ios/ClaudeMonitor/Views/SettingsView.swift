@@ -128,7 +128,7 @@ struct SettingsView: View {
                 }
                 .listRowBackground(Color.surface)
 
-                Link(destination: URL(string: "https://github.com/your-username/ios-claude-monitor")!) {
+                Link(destination: URL(string: "https://github.com/bnowak1/ios-claude-monitor")!) {
                     HStack {
                         Text("GitHub Repository")
                         Spacer()

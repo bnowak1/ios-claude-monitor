@@ -2,9 +2,12 @@
 
 Monitor your Claude Code CLI sessions from your iPhone or iPad in real-time.
 
+[![GitHub](https://img.shields.io/badge/GitHub-bnowak1%2Fios--claude--monitor-blue?logo=github)](https://github.com/bnowak1/ios-claude-monitor)
 ![Platform](https://img.shields.io/badge/platform-iOS%2017%2B-blue)
 ![Backend](https://img.shields.io/badge/backend-Bun%20%2B%20Hono-orange)
 ![License](https://img.shields.io/badge/license-MIT-green)
+
+**Live Backend:** https://claude-monitor-api.fly.dev
 
 ## Features
 
